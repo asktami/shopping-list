@@ -33,34 +33,51 @@ Additionally:
     Hint: you may find it helpful to read up on and use the following jQuery methods: .submit(), preventDefault(), toggleClass(), and closest().
 
 *****************************
+
+	USER STORIES (what the app should do):
+
+    A shopping list should be rendered to the page
+    You should be able to add items to the list
+    You should be able to check & uncheck items on the list
+    You should be able to delete items from the list
+
+*****************************
+
 QUESTIONS:
 
  1. WHICH is the correct enclosing code for jQuery
+ // this waits for DOM to finish loading before running
 	 $(document).ready(function() {
 	 ...
 	});
 
 OR
+// this doesn't wait for DOM to finish loading
+// only use if NOT waiting for something to render on the page
+// wraps all code in an anonymous function
 	$(function() {...});
 
 
 2. WHEN do you do:
 
- 	function fName () { }
+vanilla JS declare then invoke:
+ 	function fName () { };
  	fName();
 
  VS.
 
+ jQuery declare then invoke:
  	function fName () {
 	 $('.selector').on('click', function (event) {
 		...
 	 });
-  	}
+  	};
  	$(fName);
 
 
  VS.
 
+ jQuery declare & invoke anonymous function:
 	 $(function() {...});
 
 *****************************
@@ -72,15 +89,19 @@ $(function() {
 		// stop the default form submission behavior
 		event.preventDefault();
 
-		// capture item submitted
+		// CAPTURE INPUT VALUE SUBMITTED
 		let item = $(this)
 			.find('input[name="shopping-list-entry"]')
 			.val();
 
-		// clear input value
+		// ALTERNATIVE:
+		// const item = $('.shopping-list-entry').val();
+
+		// CLEAR INPUT FIELD
 		$('#shopping-list-entry').val('');
 
-		$('ul.shopping-list').append(`<li>
+		$('ul.shopping-list').append(
+			`<li>
 					<span class="shopping-item">${item}</span>
 					<div class="shopping-item-controls">
 						<button class="shopping-item-toggle">
@@ -90,10 +111,16 @@ $(function() {
 							<span class="button-label">delete</span>
 						</button>
 					</div>
-				</li>`);
+				</li>`
+		);
 	});
 
-	// check/uncheck item
+	// CHECK/UNCHECK ITEM
+	// closest = travel up & get FIRST (single) ancestor, of selected element, starting with selected element
+	// find = travel down & get all descendants, of selected element, NOT starting with selected element ?
+	// children = travel down & get direct descendants, 1 single level down, of selected element, NOT starting with selected element ?
+	// prev() = get immediately previous ancestor/parent of selected element
+
 	$('.shopping-list').on('click', '.shopping-item-toggle', function(event) {
 		$(this)
 			.closest('div')
@@ -101,7 +128,16 @@ $(function() {
 			.toggleClass('shopping-item__checked');
 	});
 
-	// delete item
+	/* ALTERNATIVE
+	$('.shopping-list').on('click', '.shopping-item-toggle', function(event) {
+    	$(this)
+    	.closest('li')
+    	.find('.shopping-item')
+    	.toggleClass('shopping-item__checked');
+  	});
+	  */
+
+	// DELETE ITEM
 	$('.shopping-list').on('click', '.shopping-item-delete', function(event) {
 		$(this)
 			.closest('li')
