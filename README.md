@@ -1,4 +1,4 @@
-#Shopping List App Challenge
+# Shopping List App
 
 [View in GitHub pages](https://asktami.github.io/shopping-list/)
 
