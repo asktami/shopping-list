@@ -1,5 +1,5 @@
 # Shopping List App
 
-[View in GitHub pages](https://asktami.github.io/shopping-list/)
+[View Live](https://asktami.github.io/shopping-list/)
 
 This repo contains files for the *Shopping List App* challenge.
