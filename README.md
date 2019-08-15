@@ -1,4 +1,4 @@
-# Shopping List App
+# jQuery Shopping List App
 
 [View Live](https://asktami.github.io/shopping-list/)
 
